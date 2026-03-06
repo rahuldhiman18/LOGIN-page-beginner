@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .container {
+      margin-top: 100px;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #555;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      cursor: pointer;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Your Dashboard</h1>
+    <p id="welcomeMessage"></p>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const token = localStorage.getItem("authToken");
+      const email = localStorage.getItem("userEmail"); // stored during login
+
+      // If no token, redirect back to login
+      if (!token) {
+        alert("You must log in first!");
+        window.location.href = "index.html"; // replace with your login page
+      }
+
+      // Show personalized welcome message
+      const welcomeMessage = document.getElementById("welcomeMessage");
+      if (email) {
+        welcomeMessage.textContent = `Hello, ${email}!`;
+      } else {
+        welcomeMessage.textContent = "Hello, User!";
+      }
+
+      // Logout clears token and redirects
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("userEmail");
+        alert("Logged out successfully!");
+        window.location.href = "login.html"; // back to login
+      });
+    });
+  </script>
+</body>
+</html>
