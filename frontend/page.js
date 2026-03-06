@@ -1,13 +1,12 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm"); 
 
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // stop page reload
 
-    const emailInput = document.getElementById("email").value.trim();
-    const passwordInput = document.getElementById("password").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
     
-    // error elements
     const emailError = document.getElementById("emailError");
     const passwordError = document.getElementById("passwordError");
 
@@ -15,16 +14,46 @@ document.addEventListener("DOMContentLoaded", function() {
     emailError.textContent = "";
     passwordError.textContent = "";
 
-    // validation example
-    if (emailInput === "") {
+    // validation
+    if (!email) {
       emailError.textContent = "Email is required";
+      return;
     }
-    if (passwordInput === "") {
+    if (!password) {
       passwordError.textContent = "Password is required";
+      return;
     }
 
-    // log values
-    console.log("Email:", emailInput);
-    console.log("Password:", passwordInput);
+    try {
+      const response = await fetch("http://localhost:2000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Save token/session
+        localStorage.setItem("authToken", data.token || "dummyToken");
+        alert("Login successful!");
+
+        // Redirect to dashboard
+        window.location.href = "dashboard.html";
+      } else {
+        alert(data.message || "Invalid credentials");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Something went wrong. Please try again.");
+    }
   });
+
+  // Auto-check if already logged in
+  const token = localStorage.getItem("authToken");
+  if (token) {
+    console.log("Already logged in with token:", token);
+    // Redirect automatically if token exists
+    window.location.href = "dashboard.html";
+  }
 });
