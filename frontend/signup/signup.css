@@ -1,0 +1,135 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+/* PAGE */
+
+body{
+height:100vh;
+background:#f5f5f5;
+}
+
+/* MAIN LAYOUT */
+
+.container{
+display:flex;
+height:100vh;
+}
+
+/* LEFT SIDE */
+
+.left{
+width:50%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:80px;
+}
+
+.left h1{
+font-size:36px;
+margin-bottom:40px;
+color:#111;
+}
+
+/* FORM */
+
+form{
+max-width:420px;
+}
+
+/* LABEL */
+
+label{
+display:block;
+margin-top:18px;
+margin-bottom:6px;
+font-size:14px;
+font-weight:500;
+}
+
+/* INPUT */
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:14px;
+background:white;
+transition:0.2s;
+}
+
+input:focus{
+outline:none;
+border-color:#2e7d32;
+box-shadow:0 0 0 2px rgba(46,125,50,0.1);
+}
+
+/* CHECKBOX */
+
+.checkbox{
+margin-top:15px;
+}
+
+.checkbox label{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:13px;
+cursor:pointer;
+}
+
+.checkbox input{
+width:16px;
+height:16px;
+}
+
+/* SIGNUP BUTTON */
+
+button{
+width:100%;
+padding:14px;
+margin-top:20px;
+background:#2e7d32;
+border:none;
+color:white;
+font-size:16px;
+border-radius:10px;
+cursor:pointer;
+transition:0.2s;
+}
+
+button:hover{
+background:#256628;
+}
+
+/* LOGIN LINK */
+
+.login-text{
+margin-top:20px;
+font-size:14px;
+color:#444;
+}
+
+.login-text a{
+color:#2e7d32;
+text-decoration:none;
+font-weight:500;
+}
+
+/* RIGHT IMAGE */
+
+.right{
+width:46%;
+background:url("noplan.jpg");
+background-size:cover;
+background-position:center;
+border-radius:30px 0 0 30px;
+margin:20px;
+}
